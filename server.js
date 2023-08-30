@@ -1,10 +1,16 @@
 const express = require('express');
-const app = express();
 const path = require('path');
+const app = express();
 
-app.use(express.static(path.join(__dirname)));
+// Configuração para servir arquivos estáticos na pasta atual
+app.use(express.static(__dirname));
 
-const PORT = 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname, 'jogo.html'));
 });
+
+app.listen(3000, () => {
+    console.log("Servidor rodando na porta 3000");
+    
+});
+

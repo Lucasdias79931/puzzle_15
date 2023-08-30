@@ -122,38 +122,9 @@ function interacao() {
                 
                     if(cont==14){
                         console.log(cont)
-                        let contador=0
-                        for(let i = 0;i<cont;i++){
-                            const num1 = parseInt(boxes[i].textContent)
-                            const num2 = parseInt(boxes[i+1].textContent)
-                            
-                            if(num1<num2){
-                                contador++
-                                
-                            }else{
-                                cont=0
-                                contador=0
-                            }
-                            
-                        }
-                       
-                        if(contador==14){
-                            Vitoria()
-                            console.log('vitoria')
-                            
-                            cont=0
-                            contador=0
-                        }
+                        verificaVitoria(cont)
 
-                        function Vitoria(){
-                            
-                           
-                            
-                            jogo.style.display = 'none'
-                            vitoria.style.display = 'grid'
-                            tentativas.textContent=contadorVitoria
-                        }
-                } 
+                    } 
             }
             }
             
@@ -162,4 +133,33 @@ function interacao() {
 }
 
 // codição de vitória
-    
+function Vitoria(){          
+    jogo.style.display = 'none'
+    vitoria.style.display = 'grid'
+    tentativas.textContent=contadorVitoria
+}
+
+function verificaVitoria(cont){
+    let contador=0
+    for(let i = 0;i<cont;i++){
+        const num1 = parseInt(boxes[i].textContent)
+        const num2 = parseInt(boxes[i+1].textContent)
+        
+        if(num1<num2){
+            contador++
+            
+        }else{
+            cont=0
+            contador=0
+        }
+        
+    }
+   
+    if(contador==14){
+        Vitoria()
+        
+        
+        cont=0
+        contador=0
+    }
+}

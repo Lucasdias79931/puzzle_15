@@ -11,6 +11,10 @@
   
 
     //iniciar jogo
+    for(let j=0;j<boxes.length-1;j++){
+        boxes[j].textContent=j+1
+    }
+
     Embaralhar.addEventListener("click",()=>{
         start(boxes)
         contadorVitoria = 0
@@ -20,10 +24,7 @@
 
      //shuffle
      function vetorEmbaralhado(arr) {
-        for(let j=0;j<arr.length-1;j++){
-            arr[j].textContent=j+1
-        }
-
+        
         for (let i = arr.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [arr[i].textContent, arr[j].textContent] = [arr[j].textContent, arr[i].textContent];
@@ -39,7 +40,7 @@
         vitoria.style.display = 'none'
         contadorVitoria=0
         
-        vetorEmbaralhado(boxes)
+        vetorEmbaralhado(arr)
         interacao()
         jogadas.textContent = contadorVitoria ;
         tentativas.textContent=contadorVitoria

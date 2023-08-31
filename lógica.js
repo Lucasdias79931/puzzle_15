@@ -19,32 +19,27 @@
    
 
      //shuffle
-     function vetorEmbaralhado() {
-        let arr = [];
-        for (let i = 0; i < 16; i++) {
-            if (i !== 15) {
-                arr.push(i + 1);
-            } else {
-                arr.push("");
-            }
+     function vetorEmbaralhado(arr) {
+        for(let j=0;j<arr.length-1;j++){
+            arr[j].textContent=j+1
         }
-    
+
         for (let i = arr.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
+            [arr[i].textContent, arr[j].textContent] = [arr[j].textContent, arr[i].textContent];
         }
     
-        return arr;
+        arr.forEach((element) => {
+            console.log(element.textContent);
+        });
     }
     
     function start(arr) {
         jogo.style.display = 'grid'
         vitoria.style.display = 'none'
         contadorVitoria=0
-        let vetorAuxiliar = vetorEmbaralhado();
-        for (let i = 0; i < vetorAuxiliar.length; i++) {
-            arr[i].textContent = vetorAuxiliar[i];
-        }
+        
+        vetorEmbaralhado(boxes)
         interacao()
         jogadas.textContent = contadorVitoria ;
         tentativas.textContent=contadorVitoria
@@ -59,8 +54,7 @@
         arr[fromIndex].textContent = arr[toIndex].textContent;
         arr[toIndex].textContent = aux;
     }
-    
-    // ...
+ 
     
     function realizarTroca(index, direction) {
         switch (direction) {
@@ -122,9 +116,31 @@ function interacao() {
                 
                     if(cont==14){
                         console.log(cont)
-                        verificaVitoria(cont)
+                        let contador=0
+                        for(let i = 0;i<cont;i++){
+                            const num1 = parseInt(boxes[i].textContent)
+                            const num2 = parseInt(boxes[i+1].textContent)
+                            
+                            if(num1<num2){
+                                contador++
+                                
+                            }else{
+                                cont=0
+                                contador=0
+                            }
+                            
+                        }
+                       
+                        if(contador==14){
+                            Vitoria()
+                            console.log('vitoria')
+                            
+                            cont=0
+                            contador=0
+                        }
 
-                    } 
+                       
+                } 
             }
             }
             
@@ -132,34 +148,12 @@ function interacao() {
     });
 }
 
-// codição de vitória
-function Vitoria(){          
+// vitória
+function Vitoria(){
+                            
+                           
+                            
     jogo.style.display = 'none'
     vitoria.style.display = 'grid'
     tentativas.textContent=contadorVitoria
-}
-
-function verificaVitoria(cont){
-    let contador=0
-    for(let i = 0;i<cont;i++){
-        const num1 = parseInt(boxes[i].textContent)
-        const num2 = parseInt(boxes[i+1].textContent)
-        
-        if(num1<num2){
-            contador++
-            
-        }else{
-            cont=0
-            contador=0
-        }
-        
-    }
-   
-    if(contador==14){
-        Vitoria()
-        
-        
-        cont=0
-        contador=0
-    }
 }
